@@ -63,7 +63,7 @@ if(isset($_POST['signup_btn'])) {
         $insert_query_run = mysqli_query($conn, $insert_query);
 
         if($insert_query_run) {
-            
+            //send to the function to send an email to the $username and his/her $email
             sendemail_verify("$username","$email","$verify_token");
             $_SESSION['status'] = "Account created successfully. Please login.";
             header('Location: loginform.php');
