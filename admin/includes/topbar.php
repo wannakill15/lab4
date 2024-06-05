@@ -8,9 +8,6 @@
       <li class="nav-item d-none d-sm-inline-block">
         <a href="index.php" class="nav-link">Home</a>
       </li>
-      <li class="nav-item d-none d-sm-inline-block">
-        <a href="#" class="nav-link">Contact</a>
-      </li>
     </ul>
 
     <!-- Right navbar links -->
@@ -28,8 +25,7 @@
             ?>
           </button>
           <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="#">Another action</a></li>
-            <li><a class="dropdown-item" href="#">Something else here</a></li>
+            <li><a class="dropdown-item" href="../user_profile/editprofile.php">Edit Profile</a></li>
             <form action="code.php" method="post">
               <button type="submit" class="dropdown-item" name="logoutbtn">Logout</button>
             </form>

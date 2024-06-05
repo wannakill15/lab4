@@ -33,21 +33,28 @@ function sendemail_verify($username,$email,$verify_token) {
     <h2>You have Registered</h4>
     <h5>Verify your Email with the link below</h5>
     <br/> <br/>
-    <a href='http://localhost:3000/lab%203/verify_email.php?token=$verify_token'>Email Verification</a>" ; 
+    <a href='http://localhost:3000/admin/verify_email.php?token=$verify_token'>Email Verification</a>" ; 
 
     $mail->send();
     echo'Verification Send';
     
 }
+function validate($data) {
+    $data = trim($data);
+    $data = stripslashes($data);
+    $data = htmlspecialchars($data);
+    return $data;
+}
 
 if(isset($_POST['signup_btn'])) {
-    $full_name = $_POST['full_name'];   
-    $email = $_POST['email'];   
-    $phone_number = $_POST['phone_number'];   
-    $address = $_POST['address'];   
-    $password = $_POST['password'];
+    $full_name = validate ($_POST['full_name']);   
+    $email = validate ($_POST['email']);   
+    $phone_number = validate ($_POST['phone_number']);   
+    $address = validate ($_POST['address']);   
+    $password = validate ($_POST['password']);
     $status = 'Not Verified';
-    $verify_token = md5(rand());
+    $active = 'Not Active';
+    $verify_token = validate (md5(rand()));
 
     // Check if the email already exists in the database
     $check_email_query = "SELECT * FROM user_profile WHERE email='$email' LIMIT 1 ";

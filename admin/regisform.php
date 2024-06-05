@@ -141,7 +141,7 @@ include("includes/sidebar.php");
                           <tr>
                             <td><?php echo $row['user_id'] ?></td>
                             <td><?php echo $row['full_name'] ?></td>
-                            <td><?php echo $row['email'] ?></td>
+                            <td><?php echo $row['Email'] ?></td>
                             <td><?php echo $row['address'] ?></td>
                             <td><?php echo $row['phone_number'] ?></td>
                             <td>

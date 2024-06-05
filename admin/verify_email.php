@@ -1,6 +1,6 @@
 <?php
 session_start();
-include('db_conn.php');
+include('config/dbcon.php');
 
 
 // a condition to get the token
@@ -31,13 +31,13 @@ if(isset($_GET['token'])) {
             if($update_query_run){
 
                 $_SESSION['status'] = "Your Account has been Verified Successfully.!";
-                header("Location: Loginform.php");
+                header("Location: loginform.php");
                 exit(0);  
 
             }else{
 
                 $_SESSION['status'] = "Verification Failed!";
-                header("Location: Loginform.php");
+                header("Location: loginform.php");
                 exit(0);  
 
             }
@@ -45,7 +45,7 @@ if(isset($_GET['token'])) {
         else 
         {
             $_SESSION['status'] = "This Email Already Verified. Please login.";
-            header("Location: Loginform.php");
+            header("Location: loginform.php");
             exit(0);    
         }
     } 
