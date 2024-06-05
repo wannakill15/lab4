@@ -17,14 +17,14 @@ if (isset($_POST['login_btn'])) {
     $email = validate($_POST['email']);
     $password = validate($_POST['password']);
 
-        $sql = "SELECT * FROM user_profile WHERE email='$email' AND password='$password' LIMIT 1";
+        $sql = "SELECT * FROM user_profile WHERE Email='$email' AND password='$password' LIMIT 1";
         $result = mysqli_query($conn, $sql);
             if (mysqli_num_rows($result) > 0)
             {
                 foreach($result as $row){
                     $user_id = $row['user_id'];
                     $full_name = $row['full_name'];
-                    $email = $row['email'];
+                    $email = $row['Email'];
                     $phone_number = $row['phone_number'];
                     $address = $row['address'];
                 }
@@ -33,20 +33,18 @@ if (isset($_POST['login_btn'])) {
                 $_SESSION['auth_user'] = [
                     'user_id' => $user_id,
                     'full_name' => $full_name,
-                    'email' => $email,
+                    'Email' => $email,
                     'phone_number' => $phone_number,
                     'address' => $address
                 ];
 
                 $_SESSION['status'] = "Logged in Successfully";
-                var_dump($_SESSION['status']); // Debugging statement
                 header("Location: index.php");
                 exit(); // Ensure no further code execution after redirection
     }
     else
     {
         $_SESSION['status'] = "Invalid email or password";
-        var_dump($_SESSION['status']); // Debugging statement
         header("Location: loginform.php");
         exit(); // Ensure no further code execution after redirection
     }
@@ -54,8 +52,7 @@ if (isset($_POST['login_btn'])) {
 else
 {
     $_SESSION['status'] = "Access Denied.!";
-    var_dump($_SESSION['status']); // Debugging statement
-    header("Location: Loginform.php");
+    header("Location: loginform.php");
     exit(); // Ensure no further code execution after redirection
 }
 ?>

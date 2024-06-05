@@ -1,10 +1,10 @@
 <?php
 session_start();
 include('includes/header.php');
+
 if(isset($_SESSION['auth']))
 {
-    $_SESSION['status'] = "You are already logged In";
-    header('Location: index.php"');
+    header('Location: index.php');
     exit(0);
 }
 
@@ -69,6 +69,3 @@ if(isset($_SESSION['auth']))
 include('includes/script.php'); 
 ?>
 
-<?php 
-include('includes/footer.php'); 
-?>
