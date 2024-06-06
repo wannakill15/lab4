@@ -21,21 +21,29 @@ if (isset($_POST['login_btn'])) {
         $result = mysqli_query($conn, $sql);
             if (mysqli_num_rows($result) > 0)
             {
+                $row = mysqli_fetch_assoc($result);
+                if ($row['Status'] == 'Not Verified'){
+                    $_SESSION['status'] = "Please Verified your Account";
+                    header("Location: loginform.php");
+                    exit();
+                }
                 foreach($result as $row){
                     $user_id = $row['user_id'];
-                    $full_name = $row['full_name'];
+                    $fullname = $row['fullname'];
                     $email = $row['Email'];
-                    $phone_number = $row['phone_number'];
+                    $phone = $row['phone'];
                     $address = $row['address'];
+                    $create = $row['Create_at'];
                 }
 
                 $_SESSION['auth'] = true;
                 $_SESSION['auth_user'] = [
                     'user_id' => $user_id,
-                    'full_name' => $full_name,
+                    'fullname' => $fullname,
                     'Email' => $email,
-                    'phone_number' => $phone_number,
-                    'address' => $address
+                    'phone' => $phone,
+                    'address' => $address,
+                    'Create_at' => $create
                 ];
 
                 $_SESSION['status'] = "Logged in Successfully";

@@ -12,7 +12,7 @@ require 'phpmailer/src/PHPMailer.php';
 require 'phpmailer/src/SMTP.php';
 
 // function to send an mail to your email you register
-function sendemail_verify($username,$email,$verify_token) {
+function sendemail_verify($email,$verify_token) {
     $mail = new PHPMailer(true);
 
     $mail->isSMTP();                                            //Send using SMTP
@@ -24,7 +24,7 @@ function sendemail_verify($username,$email,$verify_token) {
     $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;                                  //Enable implicit TLS encryption
     $mail->Port       = 587;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
 
-    $mail->setFrom('ken.ae26@gmail.com', $username);
+    $mail->setFrom('ken.ae26@gmail.com', $email);
     $mail->addAddress($email);                              //Add a recipient
 
     $mail->isHTML(true);                                  //Set email format to HTML
@@ -47,17 +47,13 @@ function validate($data) {
 }
 
 if(isset($_POST['signup_btn'])) {
-    $full_name = validate ($_POST['full_name']);   
     $email = validate ($_POST['email']);   
-    $phone_number = validate ($_POST['phone_number']);   
-    $address = validate ($_POST['address']);   
     $password = validate ($_POST['password']);
     $status = 'Not Verified';
-    $active = 'Not Active';
     $verify_token = validate (md5(rand()));
 
     // Check if the email already exists in the database
-    $check_email_query = "SELECT * FROM user_profile WHERE email='$email' LIMIT 1 ";
+    $check_email_query = "SELECT * FROM user_profile WHERE Email='$email' LIMIT 1 ";
     $check_email_query_run = mysqli_query($conn, $check_email_query);
 
     if(mysqli_num_rows($check_email_query_run) > 0) {
@@ -66,12 +62,12 @@ if(isset($_POST['signup_btn'])) {
         exit();
     } else {
         // Insert user data into the database
-        $insert_query = "INSERT INTO user_profile (full_name, email, phone_number, address, password, Status, verify_token) VALUES ('$full_name', '$email', '$phone_number', '$address', '$password', '$status', '$verify_token')";
+        $insert_query = "INSERT INTO user_profile (Email, password, Status, verify_token) VALUES ('$email', '$password', '$status', '$verify_token')";
         $insert_query_run = mysqli_query($conn, $insert_query);
 
         if($insert_query_run) {
             //send to the function to send an email to the $username and his/her $email
-            sendemail_verify("$username","$email","$verify_token");
+            sendemail_verify("$email","$verify_token");
             $_SESSION['status'] = "Account created successfully. Please login.";
             header('Location: loginform.php');
             exit();

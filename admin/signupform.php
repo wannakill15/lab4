@@ -8,16 +8,15 @@ include('includes/header.php');
         <div class="row justify-content-center">
             <div class="col-md-5 my-5">
                 <div class="card my-5">
+                    <?php
+                        include('message.php');
+                    ?>
                     <div class="card-header bg-light">
                         <h5>Create Account</h5>
                     </div>
                     <div class="card-body">
                         <!-- Your sign-up form goes here -->
                         <form action="signupcode.php" method="POST" id="signupForm">
-                            <div class="form-group">
-                                <label for="">Full Name</label>
-                                <input type="text" name="full_name" class="form-control" placeholder="Full Name" required>
-                            </div>
 
                             <div class="form-group">
                                 <label for="">Email</label>
@@ -25,25 +24,20 @@ include('includes/header.php');
                             </div>
 
                             <div class="form-group">
-                                <label for="">Phone Number</label>
-                                <input type="text" name="phone_number" class="form-control" placeholder="Phone Number" required>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="">Address</label>
-                                <input type="text" name="address" class="form-control" placeholder="Address" required>
+                                <label for="">Date</label>
+                                <input type="date" name="date" class="form-control" placeholder="Date" >
                             </div>
 
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="">Password</label>
+                                        <label for="password">Password</label>
                                         <input type="password" name="password" id="password" class="form-control" placeholder="Password" required>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="">Confirm Password</label>
+                                        <label for="confirm_password">Confirm Password</label>
                                         <input type="password" name="confirm_password" id="confirm_password" class="form-control" placeholder="Confirm Password" required>
                                         <span id="password_message" class="text-danger"></span>
                                     </div>
