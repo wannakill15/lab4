@@ -29,20 +29,14 @@ if (isset($_POST['login_btn'])) {
                 }
                 foreach($result as $row){
                     $user_id = $row['user_id'];
-                    $fullname = $row['fullname'];
                     $email = $row['Email'];
-                    $phone = $row['phone'];
-                    $address = $row['address'];
                     $create = $row['Create_at'];
                 }
 
                 $_SESSION['auth'] = true;
                 $_SESSION['auth_user'] = [
                     'user_id' => $user_id,
-                    'fullname' => $fullname,
                     'Email' => $email,
-                    'phone' => $phone,
-                    'address' => $address,
                     'Create_at' => $create
                 ];
 

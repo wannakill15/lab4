@@ -22,12 +22,6 @@ include('includes/header.php');
                                 <label for="">Email</label>
                                 <input type="text" name="email" class="form-control" placeholder="Email" required>
                             </div>
-
-                            <div class="form-group">
-                                <label for="">Date</label>
-                                <input type="date" name="date" class="form-control" placeholder="Date" >
-                            </div>
-
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">

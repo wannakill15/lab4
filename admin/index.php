@@ -26,6 +26,10 @@ include("includes/sidebar.php");
 </div>
 <!-- /.content-header -->
 
+    <?php
+    include('message.php');
+    ?>
+
     <!-- Main content -->
     <section class="content">
       <div class="container-fluid">

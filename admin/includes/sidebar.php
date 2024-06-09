@@ -1,4 +1,26 @@
-  <!-- Main Sidebar Container -->
+<?php
+
+include('config/dbcon.php');
+
+$user_id = $_SESSION['auth_user']['user_id'];
+
+$query = "SELECT profileimg FROM user_profile WHERE user_id = '$user_id'";
+$result = mysqli_query($conn, $query);
+
+if ($row = mysqli_fetch_assoc($result)) {
+    $profileimg = $_SESSION['auth_user']['profileimg'] = $row['profileimg'];
+}
+
+?>
+
+
+
+
+
+
+
+
+<!-- Main Sidebar Container -->
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     <a href="index.php" class="brand-link">
@@ -11,8 +33,11 @@
       <!-- Sidebar user panel (optional) -->
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
         <div class="image">
-          <img src="assets/dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
-        </div>
+          <?php
+          $profilePicture = isset($_SESSION['auth_user']['profileimg']) && $_SESSION['auth_user']['profileimg'] != "" ? $_SESSION['auth_user']['profileimg'] : 'uploads/avatar.png';
+          ?>
+          <img src="<?php echo 'uploads/' . $profileimg; ?>" class="brand-image img-circle elevation-3" style="opacity: .8; width: 40px; height: 40px;">
+          </div>
         <div class="info">
           <a href="profile_info.php" class="d-block">
           <?php

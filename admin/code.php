@@ -36,7 +36,7 @@ if(isset($_POST['addUser']))
         }
         else
         {
-            $query = "INSERT INTO user_profile(full_name, phone_number, email, address, password) values ('$name','$phone','$email','$address','$password')";
+            $query = "INSERT INTO user_profile(fullname, phone, Email, address, password) values ('$name','$phone','$email','$address','$password')";
             $run_query = mysqli_query($conn, $query);
     
             if ($run_query){
