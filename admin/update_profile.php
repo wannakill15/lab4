@@ -46,15 +46,17 @@ if(isset($_POST['editProfile']))
     $phone = validate ($_POST['phone']);
     $address = validate ($_POST['address']);
 
-    if(empty($fname) || ($phone) || ($address)) {
+    if(empty($fname) || empty($phone) || empty($address)) {
+        $_SESSION['status'] = "Please fill in all fields";
         header("Location: profile_info.php");
         exit();
     }
 
-    $query = "UPDATE user_profile SET fullname = '$fname', phone = '$phone', address = '$address' WHERE user_id = '$user_id'";
-    $run_query = mysqli_query($conn, $query);
+    $query = "UPDATE user_profile SET fullname = ?, phone_number = ?, address = ? WHERE user_id = ?";
+    $stmt = $conn->prepare($query);
+    $stmt->bind_param("sssi", $fname, $phone, $address, $user_id);
 
-    if($run_query){
+    if($stmt->execute()){
         $_SESSION['status'] = "Info Updated";
         header("Location: profile_info.php");
         exit();
@@ -66,9 +68,9 @@ if(isset($_POST['editProfile']))
     }
 }
 
-if(isset($_POST['birthday'])){
+if(isset($_POST['update_birthday'])){
     $user_id = $_POST['user_id'];
-    $birthday = validate ($_POST['birthday']);
+    $birthday = $_POST['birthday'];
     $birthdayvalid = new DateTime($birthday);
     $currentDate = new DateTime();
     $age = $currentDate->diff($birthdayvalid)->y;
@@ -100,9 +102,19 @@ if(isset($_POST['birthday'])){
 }
 
 if(isset($_POST['updatePassword'])){
+    $user_id = $_POST['user_id'];
     $current_password = validate($_POST['current_password']);
     $new_password = validate($_POST['new_password']);
     $confirm_password = validate($_POST['confirm_password']);
+
+    $check_password = "SELECT password FROM user_profile WHERE user_id = '$user_id'";
+    $check_result = mysqli_query($conn, $check_password);
+    $row = mysqli_fetch_assoc($check_result);
+    if($row['password'] !== $current_password) {
+        $_SESSION['status'] = "Password is incorrect";
+        header('Location: profile_info.php');
+        exit();
+    }
 
     // Check if new password and confirm password match
     if ($new_password !== $confirm_password) {

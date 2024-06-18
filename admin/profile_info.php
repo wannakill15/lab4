@@ -39,7 +39,7 @@ include("includes/sidebar.php");
                             $profileimg = $row['profileimg'];
                             $fullname = $row['fullname'];
                             $email = $row['Email'];
-                            $phone = $row['phone'];
+                            $phone = $row['phone_number'];
                             $birthday = $row['birthday'];
                             $address = $row['address'];
                             $create = $row['Create_at'];
@@ -51,7 +51,7 @@ include("includes/sidebar.php");
                             'profileimg' => $profileimg,
                             'fullname' => $fullname,
                             'Email' => $email,
-                            'phone' => $phone,
+                            'phone_number' => $phone,
                             'address' => $address,
                             'birthday' => $birthday,
                             'Create_at' => $create
@@ -91,7 +91,7 @@ include("includes/sidebar.php");
                                             }
                                         ?> 
                                 </p>
-                            </div>
+                             </div>
                             <div class="form-group">
                                 <p><strong>Address:</strong>
                                         <?php
@@ -107,7 +107,7 @@ include("includes/sidebar.php");
                                         <?php
                                             if(isset($_SESSION['auth']))
                                             {
-                                                echo $_SESSION['auth_user']['phone'];
+                                                echo $_SESSION['auth_user']['phone_number'];
                                             }
                                         ?> 
                                 </p>
@@ -169,9 +169,9 @@ include("includes/sidebar.php");
                                     <input type="hidden" id="user_id" name="user_id" class="form-control" value="<?php echo $_SESSION['auth_user']['user_id'] ?>" required>
                                     <div class="form-group">
                                         <label for="birthday">BirthDate</label>
-                                        <input type="date" name="birthday" id="birthday" value="<?php echo $_SESSION['auth_user']['birthday'] ?>" class="form-control">
+                                        <input type="date" name="birthday" id="birthday" class="form-control">
                                     </div>
-                                    <button type="submit" name="birthday" class="btn btn-primary btn-block"> Update Birthday </button>
+                                    <button type="submit" name="update_birthday" class="btn btn-primary btn-block"> Update Birthday </button>
                                     </form>
                                 </div>
                             </div>
@@ -183,6 +183,7 @@ include("includes/sidebar.php");
                                 </div>
                                 <div class="card-body">
                                     <form action="update_profile.php" method="post" enctype="multipart/form-data">
+                                    <input type="hidden" id="user_id" name="user_id" class="form-control" value="<?php echo $_SESSION['auth_user']['user_id'] ?>" required>
                                         <div class="form-group">
                                             <label for="current_password">Current Password</label>
                                             <input type="password" name="current_password" id="current_password" class="form-control">
