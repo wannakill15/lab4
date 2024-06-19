@@ -128,7 +128,6 @@ include("includes/sidebar.php");
                             <th>Email</th>
                             <th>Address</th>
                             <th>Phone No.</th>
-                            <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -140,14 +139,10 @@ include("includes/sidebar.php");
                           ?>
                           <tr>
                             <td><?php echo $row['user_id'] ?></td>
-                            <td><?php echo $row['full_name'] ?></td>
+                            <td><?php echo $row['fullname'] ?></td>
                             <td><?php echo $row['Email'] ?></td>
                             <td><?php echo $row['address'] ?></td>
                             <td><?php echo $row['phone_number'] ?></td>
-                            <td>
-                              <a href="regedit.php?user_id= <?php echo $row['user_id'] ?>" class="btn btn-info btn-sm" >Edit</a>
-                              <button type="button" value="<?php echo $row['user_id'] ?>" class="btn btn-danger btn-sm deletebtn" >Delete</a>
-                            </td>
                         </tr> 
                         <?php
                         }
@@ -177,19 +172,6 @@ include("includes/sidebar.php");
 include("includes/script.php");
 ?>
 
-<script>
-  $(document).ready(function () {
-    $('.deletebtn').click(function (e){
-      e.preventDefault()
-
-      var user_id = $(this).val();
-      //console.log(user_id);
-      $('.delete_user_id').val(user_id);
-      $('#DeleteModal').modal('show');
-
-    });
-  });
-</script>
 
 <?php 
 include("includes/footer.php");
